@@ -5,17 +5,16 @@
              Title="Ajouter une Équipe">
 
     <StackLayout Padding="10">
-        <!-- Titre de la page -->
-        <Label Text="Ajouter une nouvelle équipe"
+        
+        <Label Text="Ajouter"
                FontSize="20"
                HorizontalOptions="Center" />
 
-        <!-- Champ pour le nom de l'équipe -->
         <Entry x:Name="nomEquipeEntry" Placeholder="Nom de l'équipe" />
+        
+        <Editor x:Name="descriptionEquipeEntry" Placeholder="Description de l'équipe" />
 
-        <!-- Bouton pour enregistrer l'équipe -->
-        <Button Text="Ajouter l'équipe"
-                Clicked="OnAjouterClicked" />
+        <Button x:Name="btnEnregistrer" Text="Ajouter l'équipe" Clicked="AjouterOuModifierEquipe" />
     </StackLayout>
 </ContentPage>
 

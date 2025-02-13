@@ -3,22 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="_1Xbet.Pages.ListeEquipes"
              Title="Liste des Équipes">
-    <VerticalStackLayout Padding="10">
+
 
         <ContentPage.ToolbarItems>
-            <ToolbarItem Text="Ajouter une équipe"
+            <ToolbarItem Text="Ajouter"
                      IconImageSource="add_icon.png"
                 Clicked="OnAjouterEquipeClicked"/>
         </ContentPage.ToolbarItems>
 
-        <!-- Label explicatif -->
+    <VerticalStackLayout Padding="10">
         <Label 
             Text="Voici la liste des équipes avec leurs statistiques." 
             FontSize="18" 
             HorizontalOptions="Center" />
 
-        <!-- Grid pour afficher les titres -->
-        <Grid ColumnDefinitions="*,*,*,*,*"
+        <Grid ColumnDefinitions="200,40,40,40,40"
               RowDefinitions="Auto">
             <Label Text="Nom" Grid.Column="0" FontAttributes="Bold"/>
             <Label Text="M" Grid.Column="1" FontAttributes="Bold"/>
@@ -31,8 +30,12 @@
         <CollectionView x:Name="equipesCollectionView">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="*,*,*,*,*">
-                        <Label Text="{Binding NomEquipe}" Grid.Column="0"/>
+                    <Grid ColumnDefinitions="200,40,40,40,40">
+                        <Label Text="{Binding NomEquipe}" Grid.Column="0">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SelectEquipeTarget"/>
+                            </Label.GestureRecognizers>
+                        </Label>
                         <Label Text="{Binding NbreMatchJoue}" Grid.Column="1"/>
                         <Label Text="{Binding NbreButsMarque}" Grid.Column="2"/>
                         <Label Text="{Binding NbreButsEncaisse}" Grid.Column="3"/>

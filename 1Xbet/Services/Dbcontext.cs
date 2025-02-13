@@ -9,25 +9,22 @@ using System.Threading.Tasks;
 
 namespace _1Xbet.Services
 {
-    public class Dbcontext
+    public static class Dbcontext
     {
-        private readonly SQLiteConnection _database;
+        public static SQLiteConnection _database { get; set; }
+        private const string dbPath = "1XBet.db3";
 
-        public Dbcontext(string dbPath)
+        public static void ConfigDB()
         {
-            _database = new SQLiteConnection(dbPath);
+            var cheminBD = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), dbPath);
+
+            _database = new SQLiteConnection(cheminBD);
+
             _database.CreateTable<Equipe>();
+            _database.CreateTable<Match>();
+
         }
 
-        public ObservableCollection<Equipe> GetTeams()
-        {
-            var teams = _database.Table<Equipe>().OrderByDescending(t => t.NbrePoints).ToList();
-            return new ObservableCollection<Equipe>(teams);
-        }
 
-        public void AddTeam(Equipe equipe)
-        {
-            _database.Insert(equipe);
-        }
     }
 }

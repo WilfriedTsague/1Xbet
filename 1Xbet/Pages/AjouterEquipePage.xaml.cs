@@ -1,5 +1,5 @@
 using _1Xbet.Models;
-using _1Xbet.Services; // Assurez-vous d'avoir un service pour gérer les données
+using _1Xbet.Services; 
 using Microsoft.Maui.Controls;
 using System;
 using System.Linq;
@@ -9,49 +9,68 @@ namespace _1Xbet.Pages
 {
     public partial class AjouterEquipePage : ContentPage
     {
-        private readonly Dbcontext _dbContext;
+        private readonly Equipe _equipe;
 
         public AjouterEquipePage()
         {
             InitializeComponent();
-            _dbContext = new Dbcontext("/1Xbet.db");
+            _equipe = null;
         }
 
-        private async void OnAjouterClicked(object sender, EventArgs e)
+        public AjouterEquipePage(Equipe equipe)
         {
-            string nomEquipe = nomEquipeEntry.Text?.Trim();
+            InitializeComponent ();
+            _equipe = equipe;
 
-            if (string.IsNullOrEmpty(nomEquipe))
+            nomEquipeEntry.Text = _equipe.NomEquipe;
+            descriptionEquipeEntry.Text = _equipe.Description;
+
+        }
+
+        private async void AjouterOuModifierEquipe(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(nomEquipeEntry.Text))
             {
-                await DisplayAlert("Erreur", "Le nom de l'équipe ne peut pas être vide.", "OK");
+                await DisplayAlert("Attention", "Veuillez entrer un nom d'équipe.", "Ok");
                 return;
             }
 
-            // Vérifier si l'équipe existe déjà
-            var equipeExistante = _dbContext.GetTeams().FirstOrDefault(e => e.NomEquipe.Equals(nomEquipe, StringComparison.OrdinalIgnoreCase));
-            if (equipeExistante != null)
+            if (string.IsNullOrWhiteSpace(descriptionEquipeEntry.Text))
             {
-                await DisplayAlert("Erreur", "Cette équipe existe déjà.", "OK");
+                await DisplayAlert("Attention", "Veuillez entrer une description.", "Ok");
                 return;
             }
 
-            // Ajouter l'équipe dans la base de données
-            var nouvelleEquipe = new Equipe
+            if (_equipe == null)
             {
-                NomEquipe = nomEquipe,
-                NbreMatchJoue = 0,
-                NbreButsMarque = 0,
-                NbreButsEncaisse = 0,
-                NbrePoints = 0
-            };
 
-            _dbContext.AddTeam(nouvelleEquipe);
+                bool equipeExiste = Dbcontext._database.Table<Equipe>().Any(e => e.NomEquipe == nomEquipeEntry.Text);
+                if (equipeExiste)
+                {
+                    await DisplayAlert("Erreur", "Une équipe avec ce nom existe déjà.", "Ok");
+                    return;
+                }
 
-            // Envoyer un message pour rafraîchir la liste des équipes
-            MessagingCenter.Send(this, "NouvelleEquipe", nouvelleEquipe);
+                var nouvelleEquipe = new Equipe
+                {
+                    NomEquipe = nomEquipeEntry.Text,
+                    Description = descriptionEquipeEntry.Text
+                };
 
-            // Revenir à la liste des équipes
+                Dbcontext._database.Insert(nouvelleEquipe);
+                await DisplayAlert("Succès", "L'équipe a été ajoutée avec succès.", "Ok");
+            }
+            else
+            {
+                _equipe.NomEquipe = nomEquipeEntry.Text;
+                _equipe.Description = descriptionEquipeEntry.Text;
+
+                Dbcontext._database.Update(_equipe);
+                await DisplayAlert("Succès", "L'équipe a été mise à jour avec succès.", "Ok");
+            }
+
             await Navigation.PopAsync();
         }
+
     }
 }

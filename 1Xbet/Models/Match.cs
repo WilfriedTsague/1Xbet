@@ -14,7 +14,7 @@ namespace _1Xbet.Models
         public string EquipeExt { get; set; }
         public string EquipeDom { get; set; }
         public int ButEquipeExt { get; set; }
-        public string ButEquipeDom { get; set; }
+        public int ButEquipeDom { get; set; }
         public string Date { get; set; }
 
     }

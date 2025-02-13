@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="_1Xbet.Pages.ListeMatchs"
-             Title="Liste Des Matchs">
-    
+             x:Class="_1Xbet.Pages.EquipeDetails"
+             Title="Details de l'equipe">
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Ajouter" Clicked="AjouterMatch"/>
+        <ToolbarItem Text="Modifier" Clicked="modifyClicked"/>
     </ContentPage.ToolbarItems>
 
     <VerticalStackLayout Padding="10">
-        <Label Text="Liste de tous les matches et leurs details"
-               FontSize="18" 
-               HorizontalOptions="Center" />
+        <Label x:Name="description"
+            Text="Welcome to .NET MAUI!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Label Text="Liste de tout les matches joués par l'équipe avec les points et les buts pour chaque match."/>
+
 
         <Grid ColumnDefinitions="150,50,100">
-            <Label Text="Équipe" Grid.Column="0" FontAttributes="Bold" BackgroundColor="AliceBlue"/>
+            <Label Text="Équipe" Grid.Column="0" FontAttributes="Bold"/>
             <Label Text="Score" Grid.Column="1" FontAttributes="Bold"/>
-            <Label Text="Date match" Grid.Column="2" FontAttributes="Bold"/>
+            <Label Text="Date" Grid.Column="2" FontAttributes="Bold"/>
         </Grid>
 
-        <CollectionView x:Name="listeDesMatchs">
+        <CollectionView x:Name="listeMatches">
             <CollectionView.EmptyView>
-                <Label Text="Aucun match dans la liste...."/>
+                <Label Text="Aucun match disponible."/>
             </CollectionView.EmptyView>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="150,50,auto">
+                    <Grid ColumnDefinitions="150,50,100">
                         <VerticalStackLayout Grid.Column="0">
                             <Label Text="{Binding EquipeDom}"/>
                             <Label Text="{Binding EquipeExt}"/>
@@ -35,9 +38,7 @@
                             <Label Text="{Binding ButEquipeDom}"/>
                             <Label Text="{Binding ButEquipeExt}"/>
                         </VerticalStackLayout>
-                        <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center">
-                            <Label Text="{Binding Date}" Padding="30"/>
-                        </VerticalStackLayout>
+                        <Label Text="{Binding Date}" Grid.Column="2" HorizontalOptions="Center"/>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

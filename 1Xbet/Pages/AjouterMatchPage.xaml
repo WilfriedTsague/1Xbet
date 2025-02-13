@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_1Xbet.Pages.AjouterMatchPage"
+             Title="Ajouter Match">
+    
+    <VerticalStackLayout>
+        <Label Text="Équipe à domicile"  />
+        <Picker x:Name="choixEquipeDom" Title="Choisir une équipe" SelectedIndexChanged="pikEquipeDom">
+            <Picker.ItemDisplayBinding>
+                <Binding Path="NomEquipe" x:Name="EquipeDom"/>
+            </Picker.ItemDisplayBinding>
+        </Picker>
+
+        <Label Text="Équipe à l'extérieur"/>
+        <Picker x:Name="choixEquipeExt" Title="Choisir une équipe" SelectedIndexChanged="pikEquipeExt">
+            <Picker.ItemDisplayBinding>
+                <Binding Path="NomEquipe" x:Name="EquipeExt"/>
+            </Picker.ItemDisplayBinding>
+        </Picker>
+        <Label Text="Score"/>
+        <HorizontalStackLayout VerticalOptions="Center">
+            <Entry x:Name="ButEquipeDom" WidthRequest="200" Placeholder="but marqué équipe à domicile"/>
+            <Entry x:Name="ButEquipeExt" WidthRequest="200" Placeholder="but marqué équipe à l'exterieur"/>
+        </HorizontalStackLayout>
+
+        <Label Text="Date du match" />
+        <DatePicker x:Name="choixDate"/>
+        <Button x:Name="btnEnregistrer" Text="Enregistrer" Clicked="EnregistrerMatchClicked"/>
+    </VerticalStackLayout>
+    
+</ContentPage>
