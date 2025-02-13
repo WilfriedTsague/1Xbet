@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="_1Xbet.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:_1Xbet"
+    xmlns:pages="clr-namespace:_1Xbet.Pages"
+    Title="_1Xbet">
+
+    <FlyoutItem Title="Liste des Equipes" Icon="convert.png">
+        <ShellContent ContentTemplate="{DataTemplate pages:ListeEquipes}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Liste des Matchs" Icon="convert.png">
+        <ShellContent ContentTemplate="{DataTemplate pages:ListeMatchs}" />
+    </FlyoutItem>
+
+</Shell>

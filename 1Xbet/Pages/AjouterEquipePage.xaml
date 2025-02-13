@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_1Xbet.Pages.AjouterEquipePage"
+             Title="Ajouter une Équipe">
+
+    <StackLayout Padding="10">
+        <!-- Titre de la page -->
+        <Label Text="Ajouter une nouvelle équipe"
+               FontSize="20"
+               HorizontalOptions="Center" />
+
+        <!-- Champ pour le nom de l'équipe -->
+        <Entry x:Name="nomEquipeEntry" Placeholder="Nom de l'équipe" />
+
+        <!-- Bouton pour enregistrer l'équipe -->
+        <Button Text="Ajouter l'équipe"
+                Clicked="OnAjouterClicked" />
+    </StackLayout>
+</ContentPage>
+
+
+

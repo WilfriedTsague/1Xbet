@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_1Xbet.Pages.ListeEquipes"
+             Title="Liste des Équipes">
+    <VerticalStackLayout Padding="10">
+
+        <ContentPage.ToolbarItems>
+            <ToolbarItem Text="Ajouter une équipe"
+                     IconImageSource="add_icon.png"
+                Clicked="OnAjouterEquipeClicked"/>
+        </ContentPage.ToolbarItems>
+
+        <!-- Label explicatif -->
+        <Label 
+            Text="Voici la liste des équipes avec leurs statistiques." 
+            FontSize="18" 
+            HorizontalOptions="Center" />
+
+        <!-- Grid pour afficher les titres -->
+        <Grid ColumnDefinitions="*,*,*,*,*"
+              RowDefinitions="Auto">
+            <Label Text="Nom" Grid.Column="0" FontAttributes="Bold"/>
+            <Label Text="M" Grid.Column="1" FontAttributes="Bold"/>
+            <Label Text="BM" Grid.Column="2" FontAttributes="Bold"/>
+            <Label Text="BR" Grid.Column="3" FontAttributes="Bold"/>
+            <Label Text="Pts" Grid.Column="4" FontAttributes="Bold"/>
+        </Grid>
+
+        <!-- CollectionView pour afficher les équipes -->
+        <CollectionView x:Name="equipesCollectionView">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="*,*,*,*,*">
+                        <Label Text="{Binding NomEquipe}" Grid.Column="0"/>
+                        <Label Text="{Binding NbreMatchJoue}" Grid.Column="1"/>
+                        <Label Text="{Binding NbreButsMarque}" Grid.Column="2"/>
+                        <Label Text="{Binding NbreButsEncaisse}" Grid.Column="3"/>
+                        <Label Text="{Binding NbrePoints}" Grid.Column="4"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>
